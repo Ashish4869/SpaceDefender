@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2fa31d028756454408243aae85376d1f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _enemyAnimator: {instanceID: 0}
+  - _deathEffect: {instanceID: 0}
+  - laser: {fileID: 2422851420874131848, guid: 112d76621c9b7f14ebbf2b8f5e5d47f2, type: 3}
+  - Speed: {fileID: 3176589121224790944, guid: d3c188a5555b29742b5fc35149d6f7f3, type: 3}
+  - Shield: {fileID: 2546463381318182212, guid: 27f4993e5d0f8d145a54986b15c90271, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
