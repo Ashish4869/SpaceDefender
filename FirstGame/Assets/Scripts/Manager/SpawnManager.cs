@@ -6,8 +6,11 @@ using UnityEngine;
 /// </summary>
 public class SpawnManager : MonoBehaviour
 {
+    //To define the different states in spawning process
     public enum SpawnState  {SPAWNING , WAITING , COUNTING , STOPSPAWNING};
 
+
+    // A class that holds varialbles for spawning and a function to increase wave difficulty after 5 waves
     [System.Serializable]
     public class Wave
     {
@@ -76,6 +79,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    //spawn the next wave if no more enemies are remaining
     bool IsEnemyAlive()
     {
         _timeBetweenWaveEndChecks -= Time.deltaTime;
@@ -90,7 +94,7 @@ public class SpawnManager : MonoBehaviour
         }
         return true;
     }
-
+    //update the values so that next waves can be spawned
     void NextWave()
     {
         _state = SpawnState.COUNTING;
@@ -118,7 +122,7 @@ public class SpawnManager : MonoBehaviour
         _wave.NewWave();
     }
 
-
+    //spawn wave
     IEnumerator SpawnWave(Wave CurrentWave)
     {
         _state = SpawnState.SPAWNING;
@@ -135,7 +139,7 @@ public class SpawnManager : MonoBehaviour
     }
 
     
-
+    //Spawn enemeis in random pos on the y
     void SpawnEnemies(Wave ThisWave)
     {
         Vector2 SpawnPoint = new Vector2(transform.position.x,
@@ -164,6 +168,8 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+
+    //stop spawning once walll is broken
     void WallhasFallen()
     {
         _state = SpawnState.STOPSPAWNING;

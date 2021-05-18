@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// This is responsible for navigating the powerup from the enemey death position
+/// to the random position that the player can take
+/// </summary>
 public class PowerUps : MonoBehaviour
 {
     [SerializeField]
@@ -36,7 +39,7 @@ public class PowerUps : MonoBehaviour
         Destroy(gameObject, 5f);
     }
 
-    //this is to make sure that the game does break while running the while loop
+    //this is to make sure that the game does break while running the while loop in update
     IEnumerator Move(Vector3 Dest)
     {
         while(transform.position != Dest)

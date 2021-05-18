@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+/// <summary>
+/// To display the dialouges in a systematic way
+/// </summary>
 public class DialougeManager : MonoBehaviour
 {
     public CameraShake shake;
@@ -26,9 +28,10 @@ public class DialougeManager : MonoBehaviour
 
     private void Start()
     {
-        sentences = new Queue<string>();
+        sentences = new Queue<string>(); //Queue to store dialouges
     }
 
+    //Bring up the dialougt box and start the dialouge
     public void StartDialouge(Dialouge[] SoldierDialouge , Dialouge[] ScientistDialouge)
     {
         SD = SoldierDialouge;
@@ -37,19 +40,21 @@ public class DialougeManager : MonoBehaviour
         DisplayDialouge(SoldierDialouge[0], ScientistDialouge[0]);
     }
 
+
+    //To dispplay dialouges
     public void DisplayDialouge(Dialouge currentSolderDialouge , Dialouge CurrentScientistDialouge)
     {
         
-        sentences.Clear();
+        sentences.Clear(); //to make sure there is no previous dialouge remaining
         if (dialougeTurn == 0)
         {
-            NameText.text = currentSolderDialouge.NPCName;
+            NameText.text = currentSolderDialouge.NPCName; //set color as to who is speaking
             NameText.color = Color.yellow;
 
 
             foreach (string sentence in currentSolderDialouge.sentences)
             {
-                sentences.Enqueue(sentence);
+                sentences.Enqueue(sentence); // add sentences to the queue
             }
 
         }
@@ -67,6 +72,8 @@ public class DialougeManager : MonoBehaviour
         DisplayNextSentence();
     }
 
+
+    //To display the current dialouge that the character is saying
     public void DisplayNextSentence()
     {
         if(_canpress == true)
@@ -78,11 +85,13 @@ public class DialougeManager : MonoBehaviour
             }
 
             string sentence = sentences.Dequeue();
-            StopAllCoroutines();
+            StopAllCoroutines(); 
             StartCoroutine(TypeSentence(sentence));
         }
         
     }
+
+    //to type the diaouge in a typewriter  like sequence
 
     IEnumerator TypeSentence(string Sentence)
     {
@@ -95,10 +104,11 @@ public class DialougeManager : MonoBehaviour
     }
 
 
+    //What happens after one diaouge ends is defined here
 
     public void EndDialouge()
     {
-        
+        //to play the monster destory generator scene
         if(dialougeTurn == 1 && Dialougenumber == 6 && DidEnemyPass == false )
         {
             _canpress = false;
@@ -106,7 +116,7 @@ public class DialougeManager : MonoBehaviour
             _enemyPassedThough.SetTrigger("Pass");
             StartCoroutine(EnemyHitGenerator());
         }
-        else if(dialougeTurn == 1 && Dialougenumber == 12)
+        else if(dialougeTurn == 1 && Dialougenumber == 12) // marks ends of convo , next scene
         {
             mainMenuHolder.SetActive(false);
 
@@ -119,11 +129,11 @@ public class DialougeManager : MonoBehaviour
             FunctionCalltimes++;
             if (dialougeTurn == 0)
             {
-                dialougeTurn = 1;
+                dialougeTurn = 1; //Scientist turn to talk
             }
             else
             {
-                dialougeTurn = 0;
+                dialougeTurn = 0; //Player turn to talk
             }
 
             if (FunctionCalltimes % 2 == 0)
@@ -138,6 +148,7 @@ public class DialougeManager : MonoBehaviour
         }      
     }
 
+    //load level with fade effect
     IEnumerator LoadLevel(int LevelIndex)
     {
         _CrossFade.SetTrigger("Start");
@@ -145,6 +156,7 @@ public class DialougeManager : MonoBehaviour
         SceneManager.LoadScene(LevelIndex);
     }
 
+    //make a few changes to the scene once the monster hit the generator
     IEnumerator EnemyHitGenerator()
     {
         AudioManager.PlaySound("CrabBoss");

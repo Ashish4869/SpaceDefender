@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+/// <summary>
+/// This is for managing all the UI interaction in the main menu
+/// </summary>
 public class MainMenuManager : MonoBehaviour
 {
     [SerializeField]

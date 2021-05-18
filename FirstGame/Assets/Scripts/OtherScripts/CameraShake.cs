@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// Responsible for camera shakes and move ments
+/// </summary>
 public class CameraShake : MonoBehaviour
 {
     [SerializeField]
@@ -9,14 +11,14 @@ public class CameraShake : MonoBehaviour
     float CamMovespeed = 5f,CamZoomSpeed = 2.5f, ZoomedOrthograhpicSize = 2f ;
     
 
-
+  //calls the courintes neccessary for starting the camera effects
     public void MoveCam()
     {
         StartCoroutine(MoveToFocus());
         StartCoroutine(ZoomIn());
     }
 
-   
+   //shake the camera as per the parameters passed
     public IEnumerator Shake(float duration , float magnitude)
     {
         Vector2 OriginalCameraPos = transform.localPosition;
@@ -37,7 +39,7 @@ public class CameraShake : MonoBehaviour
         transform.localPosition = OriginalCameraPos;
     }
 
-
+    //moves the camera to the main characters
     public IEnumerator MoveToFocus()
     {
         
@@ -51,6 +53,7 @@ public class CameraShake : MonoBehaviour
 
     }
 
+    //reduces the orthographics size to make the character fit in screen
     IEnumerator ZoomIn()
     {
         while(Camera.main.orthographicSize != ZoomedOrthograhpicSize)

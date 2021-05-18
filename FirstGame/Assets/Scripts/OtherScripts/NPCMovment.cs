@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// Basic NPC movemnet that takes place in the BG
+/// </summary>
 public class NPCMovment : MonoBehaviour
 {
     [SerializeField]
@@ -23,6 +25,7 @@ public class NPCMovment : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //move the character to a position defined in the inspesctor
         Vector3 DirectionToMoveRight = (RightEnd.position - transform.position ).normalized;
         if(reachedRightEnd == false)
         {
@@ -50,6 +53,8 @@ public class NPCMovment : MonoBehaviour
         }
     }
 
+
+    //wait for some before turn around
     IEnumerator WaitforSomeTime(int side)
     {
         yield return new WaitForSeconds(waittime);

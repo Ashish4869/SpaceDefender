@@ -59,6 +59,7 @@ public class UIManager : MonoBehaviour
        
     }
 
+    //update ui
     public void NewWave()
     {
         Wave++;
@@ -66,7 +67,8 @@ public class UIManager : MonoBehaviour
         AudioManager.PlaySound("WaveAlert");
         StartCoroutine(AnimateWaveReadier());
     }
-
+    
+    //Play next wave animation
     IEnumerator AnimateWaveReadier()
     {
         _WaveReadierAnim.SetBool("NewWave", true);
@@ -74,6 +76,7 @@ public class UIManager : MonoBehaviour
         _WaveReadierAnim.SetBool("NewWave", false);
     }
 
+    //set max health to fulll
     public void SetMaxHealth(float health)
     {
         _slider.maxValue = health;
@@ -82,11 +85,14 @@ public class UIManager : MonoBehaviour
 
     }
 
+    //set health to wall the current wall health is 
     public void SetHealth(float health)
     {
         _slider.value = health;
         _fillImage.color = _gradient.Evaluate(_slider.normalizedValue);
     }
+
+    //increase health in case heart as been ecountered and display approriate message
     public void SetHealth(int health)
     {
         _slider.value += health;
@@ -104,11 +110,13 @@ public class UIManager : MonoBehaviour
         _healthIncrease.SetActive(false);
     }
 
+    //Update ui
     public void SetWall(Sprite CurrentWallCondition)
     {
         _walls.sprite = CurrentWallCondition;
     }
 
+    //increment kill count in the ui
     public void UpdateKillCount(int EID)
     {
         switch(EID)
@@ -130,6 +138,8 @@ public class UIManager : MonoBehaviour
         }
     }
 
+
+    //Update the ui as the player picks the power up
     public void ActivatePowerUpUI(int PowerUpID)
     {
         
@@ -151,6 +161,8 @@ public class UIManager : MonoBehaviour
                 break;
         }
     }
+
+    //deactivate the power up after its designated cooldown
     public void DeactivatePowerUpUI(int PowerUpID)
     {
         switch (PowerUpID)
@@ -172,7 +184,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-
+    //pause game and stop time
     public void PauseGame()
     {
         _PauseMenu.SetActive(true);
@@ -180,6 +192,7 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 0;
     }
 
+    //resume game and make time run as normal
     public void ResumeGame()
     {
         _PauseMenu.SetActive(false);
@@ -188,6 +201,7 @@ public class UIManager : MonoBehaviour
         AudioManager.PlaySound("ButtonPress");
     }
 
+    //starts the game over animation and stores the highscore
     public void GameOver()
     {
         if(Wave > PlayerPrefs.GetInt("Waves" , 0))
@@ -201,6 +215,7 @@ public class UIManager : MonoBehaviour
         Wall.WallFallen -= GameOver;
     }
 
+    //waiting for dramatic effect
     IEnumerator WaitForGameOver()
     {
         int totalKillCount = _crabKillCount + _OctopusKillCount + _SpiderKillCount;
@@ -213,7 +228,7 @@ public class UIManager : MonoBehaviour
         _WavesLasted.text = "You Have Lasted " + Wave + " Waves!";
     }
 
-
+    //relaod the game
     public void ReloadGame()
     {
         AudioManager.PlaySound("ButtonPress");
@@ -221,6 +236,7 @@ public class UIManager : MonoBehaviour
       
     }
 
+    //perform slow motion effect for more drama
     void SlowMotion()
     {
         _slowmoUpdatedo = true;
@@ -228,17 +244,21 @@ public class UIManager : MonoBehaviour
         Time.fixedDeltaTime = Time.timeScale * 0.02f;
     }
 
+    //perform the last camera shake effect once the player dies
     IEnumerator PlayLastShakeLate()
     {
         yield return null;
         StartCoroutine(LastShake.Shake(0.1f, 1f));
     }
 
+
+    //to quit game
    public void QuitGame()
     {
         Application.Quit();
     }
 
+    //To navigate to main menu
     public void GotoMainMenu()
     {
         Time.timeScale = 1;
@@ -246,6 +266,7 @@ public class UIManager : MonoBehaviour
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex - 1));
     }
 
+    //To load next level with fade effect
     IEnumerator LoadLevel(int LevelIndex)
     {
         _CrossFade.SetTrigger("Start");

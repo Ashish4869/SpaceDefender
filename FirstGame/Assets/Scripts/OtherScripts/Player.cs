@@ -6,6 +6,8 @@ using UnityEngine;
 /// Script the controls the following about the player 
 /// 1. Movement
 /// 2. Shooting
+/// 3. PowerUpActivation
+/// 4. Disabling player
 /// </summary>
 
 public class Player : MonoBehaviour
@@ -126,8 +128,8 @@ public class Player : MonoBehaviour
 
     void Shoot()
     {
-        
-        
+        //Using Bullet ID and powerup to let the player know which bullet to shoot and
+        //assigning prefab as that said condition
         GameObject ZaBullet;
         if(_isLaserPowerUpPicked == false)
         {
@@ -153,7 +155,7 @@ public class Player : MonoBehaviour
         }
     }
 
-
+    //turn on the muzzle flash when needed
     IEnumerator MuzzleFlash()
     {
         _MuzzleFlash.SetActive(true);

@@ -4,7 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// A enemy script attached to enemy for movement and collision detection
+/// A enemy script attached to enemy for
+/// 1.Movement
+/// 2.Damaging the wall
+/// 3.Assigning whether to give power up
 /// </summary>
 public class Enemy : MonoBehaviour
 {
@@ -51,7 +54,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //if not the octo make the movment linear
         if(EID !=3)
         {
             transform.Translate(Vector2.left * _speed * Time.deltaTime);
@@ -98,7 +101,8 @@ public class Enemy : MonoBehaviour
                     PrevID = ID;
                 }
 
-
+                //spawn power up by first making sure that the player doesnt have the power up
+                //being spawned
                 if(!_isBoss)
                 {
                     switch (ID)
@@ -155,6 +159,8 @@ public class Enemy : MonoBehaviour
         }
     }
 
+
+    //Static variables that govern whether the player has the power up or not 
     public static void PowerUpUpdater(int ID)
     {
         switch(ID)
@@ -208,6 +214,7 @@ public class Enemy : MonoBehaviour
                 Die(1000,1);
                 break;
 
+                //play appropriate sound effect for respective boss
             case "BossEntryCheck":
                 if(_isBoss == true)
                 {
@@ -233,6 +240,7 @@ public class Enemy : MonoBehaviour
        
     }
 
+    //damage the wall and additional functions if boss
     public void WallhitEffect()
     {
        if (_isWallBroken == false)
@@ -255,6 +263,8 @@ public class Enemy : MonoBehaviour
         }
     }
 
+
+    //to transform a basic enemy into a boss
     public void Bossify()
     {
         if(EID == 3)

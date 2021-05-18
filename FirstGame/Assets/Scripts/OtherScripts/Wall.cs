@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// This scripts is for taking care of wall related functions and calling game over screen once wall dead
+/// </summary>
 public class Wall : MonoBehaviour
 {
+    //Public static event that is called once the wall is destroyed
     public static event System.Action WallFallen;
     [SerializeField]
     Sprite _wallDamaged;
@@ -30,6 +33,7 @@ public class Wall : MonoBehaviour
         _healthbar.SetWall(_wallNoDamage);
     }
 
+    // damage the wall when enemy hits it and update the same in the UI
     public void TakeDamage(float damage)
     {
         _health -= damage;
@@ -47,6 +51,7 @@ public class Wall : MonoBehaviour
                 StartCoroutine(Shake.Shake(0.1f, 0.75f));
             }
 
+            //shake the camera if health cross below 25
             _hasShakePlayedWhen25 = true;
             _wallSprites.sprite = _wallHeavilydamaged;
             _healthbar.SetWall(_wallHeavilydamaged);
@@ -71,6 +76,7 @@ public class Wall : MonoBehaviour
         }
     }
 
+    //if pickked up heart power up increase health
     public void Heart(int hearth)
     {
         _health += hearth;

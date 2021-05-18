@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    //static variables of all the sounds that is used in this game
     public static AudioClip _bulletSound, _laserSound, _bossEntryCrab, _bossEntryOcto, _bossEntrySpider, _Enemydeath, _HitSound , _playerDeath , _waveAlert ,ButtonHover , ButtonPress ,_powerUpSound ,WallDamage , _healthRegeneration , _hitWall ,_alertMusic;
     static AudioSource _audiosource;
     // Start is called before the first frame update
@@ -30,12 +31,8 @@ public class AudioManager : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
+    // this function will allow a sound effect to play at any instance of time
     public static void PlaySound(string SoundName)
     {
         switch(SoundName)

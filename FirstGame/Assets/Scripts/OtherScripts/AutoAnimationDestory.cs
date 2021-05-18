@@ -9,6 +9,7 @@ public class AutoAnimationDestory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //destroys the game object in which this script is attached to after the animation
         Destroy(gameObject, GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
     }
 
