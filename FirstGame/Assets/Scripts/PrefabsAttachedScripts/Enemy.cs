@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour
     
     // Start is called before the first frame update
     void Start()
-    {
+    { 
         _Wall = FindObjectOfType<Wall>().GetComponent<Wall>();
         _upDateEnemyKillCount = FindObjectOfType<UIManager>().GetComponent<UIManager>();
         BossRoar = FindObjectOfType<CameraShake>().GetComponent<CameraShake>();

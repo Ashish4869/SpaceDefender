@@ -119,16 +119,18 @@ MonoBehaviour:
   EID: 1
   _enemyAnimator: {fileID: 3371706884021893869}
   _deathEffect: {fileID: 560214505747182678, guid: f189d6c584c16b04a84ac347cc829245, type: 3}
-  _LaserDeathEffect: {fileID: 497917297220190887, guid: 2f33feede1456dc42a39a015d971298e, type: 3}
   laser: {fileID: 2422851420874131848, guid: 112d76621c9b7f14ebbf2b8f5e5d47f2, type: 3}
   Speed: {fileID: 3176589121224790944, guid: d3c188a5555b29742b5fc35149d6f7f3, type: 3}
   Shield: {fileID: 2546463381318182212, guid: 27f4993e5d0f8d145a54986b15c90271, type: 3}
   _Heart: {fileID: 7638398395119463630, guid: ea273861943f0e34aa071546fc4425bf, type: 3}
   _upDateEnemyKillCount: {fileID: 0}
+  BossRoar: {fileID: 0}
+  _Wall: {fileID: 2311233881837538120, guid: fcf89145cd506b34b9878a92ec1f16b0, type: 3}
   _speed: 1
   _upSpeed: 0.5
   _health: 10
   _isBoss: 0
+  _powerUpInstantiated: 0
 --- !u!61 &3371706884021893858
 BoxCollider2D:
   m_ObjectHideFlags: 0

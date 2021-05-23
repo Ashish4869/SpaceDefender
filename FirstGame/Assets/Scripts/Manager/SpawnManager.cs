@@ -22,7 +22,8 @@ public class SpawnManager : MonoBehaviour
         public void WaveUp()
         {
             _Enemycount *= 2f;
-            _SpawnRate *= 2f;
+            _SpawnRate *= 3f;
+            
         }
     }
 
@@ -111,11 +112,15 @@ public class SpawnManager : MonoBehaviour
             {
                 _waves[i].WaveUp();
             }
-
+            
             _nextWave = 0;
         }
         else
         {
+            if (_timeBetweenWaves >= 0.5)
+            {
+                _timeBetweenWaves -= 0.4f;
+            }
             _nextWave++;
         }
 
@@ -126,11 +131,17 @@ public class SpawnManager : MonoBehaviour
     IEnumerator SpawnWave(Wave CurrentWave)
     {
         _state = SpawnState.SPAWNING;
+
+        
         for(int i = 0; i< CurrentWave._Enemycount; i++)
         {
-            SpawnEnemies(CurrentWave);
+            if (_state != SpawnState.STOPSPAWNING)
+            {
+                SpawnEnemies(CurrentWave);
 
-            yield return new WaitForSeconds(1 / CurrentWave._SpawnRate);
+                yield return new WaitForSeconds(1 / CurrentWave._SpawnRate);
+            }
+            
         }
 
         _state = SpawnState.WAITING;

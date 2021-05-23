@@ -27,6 +27,7 @@ public class Wall : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        transform.position = new Vector2(Camera.main.aspect * Camera.main.orthographicSize *-1/3, 0f);
         _healthbar.SetMaxHealth(_health);
         _wallSprites = GetComponent<SpriteRenderer>();
         _wallSprites.sprite = _wallNoDamage;

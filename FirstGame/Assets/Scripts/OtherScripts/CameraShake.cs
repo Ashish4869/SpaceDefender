@@ -62,9 +62,5 @@ public class CameraShake : MonoBehaviour
             Camera.main.orthographicSize, ZoomedOrthograhpicSize, CamZoomSpeed * Time.deltaTime);
             yield return null;
         } 
-    }  
-
-
-    
-   
+    }    
 }

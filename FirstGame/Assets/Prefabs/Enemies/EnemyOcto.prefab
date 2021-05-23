@@ -80,7 +80,7 @@ MonoBehaviour:
   _Heart: {fileID: 7638398395119463630, guid: ea273861943f0e34aa071546fc4425bf, type: 3}
   _upDateEnemyKillCount: {fileID: 0}
   BossRoar: {fileID: 0}
-  _Wall: {fileID: 0}
+  _Wall: {fileID: 2311233881837538120, guid: fcf89145cd506b34b9878a92ec1f16b0, type: 3}
   _speed: 1
   _upSpeed: 0.5
   _health: 10

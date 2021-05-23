@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 /// <summary>
 /// Script the controls the following about the player 
@@ -37,8 +38,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     GameObject _Shield;
     SpriteRenderer _playerSprite;
-    
-    
+
+    public float MaxHeightPlayerCanGo;
+    public float MaxWidthPlayerCanGO;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,7 +60,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         //checking if the player is pressing the fire button facing towards and right and not in cooldown time
-        if(Input.GetButtonDown("Fire1") && inputDirection.x >= 0 && Time.time > _nextFire && _canFire == true)
+        if(CrossPlatformInputManager.GetButtonDown("Jump") && inputDirection.x >= 0 && Time.time > _nextFire && _canFire == true)
         {
             _nextFire = Time.time + _fireRate;
             _playerAnimator.SetBool("IsShooting", true);
@@ -75,13 +79,13 @@ public class Player : MonoBehaviour
         }
 
         //taking user input and make the player move 
-        inputDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+        inputDirection = new Vector2(CrossPlatformInputManager.GetAxisRaw("Horizontal"), CrossPlatformInputManager.GetAxisRaw("Vertical")).normalized;
         transform.Translate(inputDirection * _speed * Time.deltaTime);
         
         //Defining the edges
-        float MaxHeightPlayerCanGo = _screenHalfHeightInWorldUnits - (transform.localScale.y) / 2;
-        float MaxWidthPlayerCanGO = _screenHalfWidthInWorldUnits - (transform.localScale.x) / 6;
-
+       MaxHeightPlayerCanGo = _screenHalfHeightInWorldUnits - (transform.localScale.y) / 2;
+        MaxWidthPlayerCanGO = _screenHalfWidthInWorldUnits; 
+        
         //triggering the movement animation
         if(inputDirection.magnitude != 0 )
         {
@@ -118,9 +122,9 @@ public class Player : MonoBehaviour
             transform.position = new Vector2(-MaxWidthPlayerCanGO, transform.position.y);
         }
 
-        if(transform.position.x >= -MaxWidthPlayerCanGO + MaxWidthPlayerCanGO/2)
+        if(transform.position.x >= MaxWidthPlayerCanGO * -1 / 3 - 1)
         {
-            transform.position = new Vector2(-MaxWidthPlayerCanGO + (MaxWidthPlayerCanGO / 2), transform.position.y);
+            transform.position = new Vector2(MaxWidthPlayerCanGO *-1/3 - 1, transform.position.y);
         }
 
 

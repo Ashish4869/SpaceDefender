@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField]
+    GameObject MobileGameUI;
+    [SerializeField]
+    GameObject Pause;
     public Animator _CrossFade;
     public Slider _slider;
     public Gradient _gradient;
@@ -25,15 +29,19 @@ public class UIManager : MonoBehaviour
     GameObject _PauseMenu;
     [SerializeField]
     GameObject _UIManager;
+    [SerializeField]
+    GameObject _WaveCounter;
     public CameraShake LastShake;
     float _slowDownFactor = 0.1f;
     float _slowDownLenght = 5f;
     bool _slowmoUpdatedo = false;
+    bool _canPause = true;
     
     
     // Start is called before the first frame update
     void Start()
     {
+        _WaveCounter.SetActive(true);
         for(int i =1; i < 4; i++)
         {
             DeactivatePowerUpUI(i);
@@ -187,15 +195,22 @@ public class UIManager : MonoBehaviour
     //pause game and stop time
     public void PauseGame()
     {
-        _PauseMenu.SetActive(true);
-        _PauseMenuAnim.SetBool("IsPaused", true);
-        Time.timeScale = 0;
+        if(_canPause == true)
+        {
+            Pause.SetActive(false);
+            AudioManager.PlaySound("ButtonPress");
+            _PauseMenu.SetActive(true);
+            _PauseMenuAnim.SetBool("IsPaused", true);
+            Time.timeScale = 0;
+        }
+        
     }
 
     //resume game and make time run as normal
     public void ResumeGame()
     {
         _PauseMenu.SetActive(false);
+        Pause.SetActive(true);
         _PauseMenuAnim.SetBool("IsPaused", false);
         Time.timeScale = 1;
         AudioManager.PlaySound("ButtonPress");
@@ -204,6 +219,10 @@ public class UIManager : MonoBehaviour
     //starts the game over animation and stores the highscore
     public void GameOver()
     {
+        MobileGameUI.SetActive(false);
+        Pause.SetActive(false);
+        _WaveCounter.SetActive(false);
+        
         if(Wave > PlayerPrefs.GetInt("Waves" , 0))
         {
             PlayerPrefs.SetInt("Waves", Wave);
@@ -213,6 +232,7 @@ public class UIManager : MonoBehaviour
         SlowMotion();
         StartCoroutine(PlayLastShakeLate());
         Wall.WallFallen -= GameOver;
+        _canPause = false;
     }
 
     //waiting for dramatic effect
@@ -231,11 +251,11 @@ public class UIManager : MonoBehaviour
     //relaod the game
     public void ReloadGame()
     {
+        FindObjectOfType<AdManager>().ShowAds();
         AudioManager.PlaySound("ButtonPress");
-       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-      
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
+    
     //perform slow motion effect for more drama
     void SlowMotion()
     {
@@ -255,14 +275,17 @@ public class UIManager : MonoBehaviour
     //to quit game
    public void QuitGame()
     {
+        AudioManager.PlaySound("ButtonPress");
         Application.Quit();
     }
 
     //To navigate to main menu
     public void GotoMainMenu()
     {
-        Time.timeScale = 1;
+        FindObjectOfType<AdManager>().ShowAds();
         _UIManager.SetActive(false);
+        AudioManager.PlaySound("ButtonPress");
+        Time.timeScale = 1;
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex - 1));
     }
 
@@ -273,6 +296,4 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(LevelIndex);
     }
-
-
 }

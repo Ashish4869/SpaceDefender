@@ -25,19 +25,19 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField]
     GameObject MainMenu;
 
-
-
     private void Start()
     {
         HighScoreS.text = "HighScore : " + PlayerPrefs.GetInt("Waves" , 0).ToString() + " Waves";
     }
     public void PlayGame()
     {
+        AudioManager.PlaySound("ButtonPress");
         HighScore.SetActive(false);
         SkipIntro.SetActive(true);      
     }
     public void HideMainMenu()
     {
+        AudioManager.PlaySound("ButtonPress");
         _mainmenuAnimation.SetBool("MOVEIN", false);
     }
 
@@ -48,35 +48,41 @@ public class MainMenuManager : MonoBehaviour
 
     public void ShowHowtoPlay()
     {
+        AudioManager.PlaySound("ButtonPress");
         HowToplay.SetActive(true);
         HideMainMenu();
     }
 
     public void HideHowToPlay()
     {
+        AudioManager.PlaySound("ButtonPress");
         HowToplay.SetActive(false);
         ShowMainMenu();
     }
 
     public void ShowCredits()
     {
+        AudioManager.PlaySound("ButtonPress");
         Credits.SetActive(true);
         HideMainMenu();
     }
 
     public void HideCredits()
     {
+        AudioManager.PlaySound("ButtonPress");
         Credits.SetActive(false);
         ShowMainMenu();
     }
 
     public void Quit()
     {
+        AudioManager.PlaySound("ButtonPress");
         Application.Quit();
     }
 
     public void Skip()
     {
+        AudioManager.PlaySound("ButtonPress");
         MainMenu.SetActive(false);
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
     }
