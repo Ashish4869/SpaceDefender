@@ -11,13 +11,18 @@ public class AdManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Advertisement.Initialize(GooglePlayID, GameMode);
+        Advertisement.Initialize(GooglePlayID, false);
     }
 
 
-    public void ShowAds()
+    public void ShowInterstitialAds()
     {
-        Advertisement.Show();
+        if (Advertisement.IsReady() == true)
+        {
+            Advertisement.Show("Interstitial_Android");
+        }
+        else return;
+        
         
     }
 

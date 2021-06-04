@@ -66475,7 +66475,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1008947202}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -87999,9 +87999,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Movement : -\nUse the W A S D  / Arrows Keys to move the character around
-    \n\nShoot : \nUse the \"Spacebar\" to shoot with your gun!\n\nTip : \nUse the
-    UI (User Interface) in the game to know about status such as health etc."
+  m_Text: "Movement : -\nUse the Joystick situated at the botttom left of the screen
+    to move the character around \n\nShoot : \nUse the \"FIRE\" button situated at
+    the bottom right to shoot with your gun!\n\nTip : \nUse the UI (User Interface)
+    in the game to know about status such as health etc."
 --- !u!222 &1346530443
 CanvasRenderer:
   m_ObjectHideFlags: 0

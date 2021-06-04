@@ -251,7 +251,7 @@ public class UIManager : MonoBehaviour
     //relaod the game
     public void ReloadGame()
     {
-        FindObjectOfType<AdManager>().ShowAds();
+        FindObjectOfType<AdManager>().ShowInterstitialAds();
         AudioManager.PlaySound("ButtonPress");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
@@ -282,7 +282,7 @@ public class UIManager : MonoBehaviour
     //To navigate to main menu
     public void GotoMainMenu()
     {
-        FindObjectOfType<AdManager>().ShowAds();
+        FindObjectOfType<AdManager>().ShowInterstitialAds();
         _UIManager.SetActive(false);
         AudioManager.PlaySound("ButtonPress");
         Time.timeScale = 1;
